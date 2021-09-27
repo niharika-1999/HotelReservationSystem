@@ -12,15 +12,20 @@ public class Hotel
 	private String hotelName;
 	private double weekdayRateForRegularCustomer;
 	private double weekendRateForRegularCustomer;
+	private double weekendRateForRewardCustomer;
+	private double weekdayRateForRewardCustomer;
 	private int hotelRatings;
 
-	public Hotel(String hotelName,double weekdayRateForRegularCustomer,double weekendRateForRegularCustomer,int hotelRatings)
+	public Hotel(String hotelName,double weekdayRateForRegularCustomer,double weekendRateForRegularCustomer, int hotelRatings, double weekdayRateForRewardCustomer, double weekendRateForRewardCustomer)
 	{
 		this.setHotelName(hotelName);
-		this.setWeekdayRate(weekdayRateForRegularCustomer);
-		this.setWeekendRate(weekendRateForRegularCustomer);
+		this.setWeekdayRateForRegularCustomer(weekdayRateForRegularCustomer);
+		this.setWeekendRateForRegularCustomer(weekendRateForRegularCustomer);
+		this.setWeekdayRateForRewardCustomer(weekdayRateForRewardCustomer);
+		this.setWeekendRateForRewardCustomer(weekendRateForRewardCustomer);
 		this.setHotelRatings(hotelRatings);
 	}
+
 
 	public String getHotelName() 
 	{
@@ -31,7 +36,7 @@ public class Hotel
 	{
 		this.hotelName = hotelName;
 	}
-	
+
 	public int getRatings()
 	{
 		return hotelRatings;
@@ -42,27 +47,45 @@ public class Hotel
 		this.hotelRatings = hotelRatings;
 	}
 
-
-	public double getWeekdayRate() 
+	public double getWeekdayRateForRegularCustomer() 
 	{
 		return weekdayRateForRegularCustomer;
 	}
 
-	public void setWeekdayRate(double weekdayRateForRegularCustomer)
+	public void setWeekdayRateForRegularCustomer(double weekdayRateForRegularCustomer)
 	{
 		this.weekdayRateForRegularCustomer = weekdayRateForRegularCustomer;
 	}
 
-	//getter method to get rate of regular weekend
-	public double getWeekendRate()
+	public double getWeekendRateForRegularCustomer()
 	{
 		return weekendRateForRegularCustomer;
 	}
 
-	//setter method to set the rate of regular weekend
-	public void setWeekendRate(double weekendRateForRegularCustomer)
+	public void setWeekendRateForRegularCustomer(double weekendRateForRegularCustomer)
 	{
 		this.weekendRateForRegularCustomer = weekendRateForRegularCustomer;
-	}	 
+	}	
+
+	public double getWeekendRateForRewardCustomer()
+	{
+		return weekendRateForRewardCustomer;
+	}
+
+	private void setWeekendRateForRewardCustomer(double weekendRateForRewardCustomer) 
+	{
+		this.weekendRateForRewardCustomer = weekendRateForRewardCustomer;
+	}
+
+	public double getWeekdayRateForRewardCustomer()
+	{
+		return weekdayRateForRewardCustomer;
+	}
+
+	private void setWeekdayRateForRewardCustomer(double weekdayRateForRewardCustomer) 
+	{
+		this.weekdayRateForRewardCustomer = weekdayRateForRewardCustomer;		
+	}
 }
+
 

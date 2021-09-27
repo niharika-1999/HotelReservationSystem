@@ -16,9 +16,9 @@ public class HotelReservation {
 	 * @param weekdayRateForRegularCustomer
 	 * @param weekendRateForRegularCustomer
 	 */
-	public void addHotel(String hotelName, double weekdayRateForRegularCustomer, double weekendRateForRegularCustomer,int hotelRatings)
+	public void addHotel(String hotelName, double weekdayRateForRegularCustomer, double weekendRateForRegularCustomer, int hotelRatings, double weekdayRateForRewardCustomer, double weekendRateForRewardCustomer)
 	{
-		hotelReservation.add(new Hotel(hotelName, weekdayRateForRegularCustomer, weekendRateForRegularCustomer,hotelRatings));
+		hotelReservation.add(new Hotel(hotelName, weekdayRateForRegularCustomer, weekendRateForRegularCustomer, hotelRatings, weekdayRateForRewardCustomer, weekendRateForRewardCustomer));
 
 	}
 	/**
@@ -42,10 +42,10 @@ public class HotelReservation {
 		{
 			if(j>1&&j<7)
 			{ 
-				temp+=hotel.getWeekdayRate();
+				temp+=hotel.getWeekdayRateForRegularCustomer();
 			}
 			else
-				temp+=hotel.getWeekendRate();  
+				temp+=hotel.getWeekendRateForRegularCustomer();  
 		}
 		return temp;
 	}
@@ -88,16 +88,16 @@ public class HotelReservation {
 	public String BestRatedHotel(Date checkIn,Date checkOut)
 	{
 		List<Integer> days=new ArrayList<>();
-		Date i=checkIn;
+		Date date=checkIn;
 		double  ratings=0;
 		Hotel bestHotel = null;
-		while(i.compareTo(checkOut)<1)
+		while(date.compareTo(checkOut)<1)
 		{
 			Calendar cal = Calendar.getInstance();
-			cal.setTime(i);
+			cal.setTime(date);
 			days.add(cal.get(Calendar.DAY_OF_WEEK));
 			cal.add( Calendar.DATE, 1 );
-			i = cal.getTime();
+			date = cal.getTime();
 		}
 		for(Hotel hotel:hotelReservation)
 		{ 
