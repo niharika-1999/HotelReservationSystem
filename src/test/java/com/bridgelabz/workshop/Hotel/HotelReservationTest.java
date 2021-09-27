@@ -11,13 +11,13 @@ public class HotelReservationTest {
 	@Test
 	public void checkAddHotel() throws ParseException
     {
-        reservationSystem.addHotel("Lakewood",110,90);
-        reservationSystem.addHotel("Ridgewood",220,150);
-        reservationSystem.addHotel("Bridgewood",160,50);
+        reservationSystem.addHotel("Lakewood",110,90,3);
+        reservationSystem.addHotel("Ridgewood",220,150,5);
+        reservationSystem.addHotel("Bridgewood",160,50,4);
         int entry=reservationSystem.totalHotels();
         Assert.assertEquals(3,entry);
         SimpleDateFormat formatter = new SimpleDateFormat("ddMMMyyyy", Locale.ENGLISH);
-        String entryHotel=reservationSystem.cheapHotel(formatter.parse("3Oct2020"),formatter.parse("15Oct2020"));
+        String entryHotel=reservationSystem.cheapHotel(formatter.parse("5Oct2020"),formatter.parse("6Oct2020"));
         Assert.assertEquals("Lakewood",entryHotel);
     }
 }

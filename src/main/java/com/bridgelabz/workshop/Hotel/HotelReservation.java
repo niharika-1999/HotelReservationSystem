@@ -18,9 +18,9 @@ public class HotelReservation {
 	 * @param weekdayRateForRegularCustomer
 	 * @param weekendRateForRegularCustomer
 	 */
-	public void addHotel(String hotelName, double weekdayRateForRegularCustomer, double weekendRateForRegularCustomer)
+	public void addHotel(String hotelName, double weekdayRateForRegularCustomer, double weekendRateForRegularCustomer,int hotelRatings)
 	{
-		hotelReservation.add(new Hotel(hotelName, weekdayRateForRegularCustomer, weekendRateForRegularCustomer));
+		hotelReservation.add(new Hotel(hotelName, weekdayRateForRegularCustomer, weekendRateForRegularCustomer,hotelRatings));
 
 	}
 	/**
@@ -31,28 +31,58 @@ public class HotelReservation {
 	{
 		return hotelReservation.size();
 	}
+	/**
+	 * costHotel gives the rate of the stay for each Hotel
+	 * @param days
+	 * @param hotel
+	 * @return
+	 */
+	public double costHotel(List<Integer> days,Hotel hotel)
+	{
+		double temp=0;
+		for(int j:days)
+		{
+			if(j>1&&j<7)
+			{ 
+				temp+=hotel.getWeekdayRate();
+			}
+			else
+				temp+=hotel.getWeekendRate();  
+		}
+		return temp;
+	}
 
 	/**
 	 * Method cheapHotel gives the cost of hotel which is cheap 
 	 */
 	public String cheapHotel(Date checkIn, Date checkOut)
 	{
-		int days = (int)( (checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24));
-		if(days==0)
-			days=1;
-		double cost = hotelReservation.get(0).getWeekdayRate() * days;
-		String hotelName = hotelReservation.get(0).getHotelName();
-		for(int i=1;i<hotelReservation.size();i++)
+		List<Integer> days = new ArrayList<>();
+		Date date = checkIn;
+		while(date.compareTo(checkOut) == -1)
 		{
-			if(cost>hotelReservation.get(i).getWeekdayRate() * days)
-			{
-				cost = hotelReservation.get(i).getWeekdayRate() * days;
-				hotelName = hotelReservation.get(i).getHotelName();
-			}                    
+			Calendar cal=Calendar.getInstance();
+			cal.setTime(date);
+			days.add(cal.get(Calendar.DAY_OF_WEEK));
+			cal.add( Calendar.DATE, 1 );
+			date = cal.getTime();
 		}
-		System.out.println("Hotel name to stay is "+hotelName+" and the cost is Rs."+cost);
-		return hotelName;
-	}  
+		double cost;
+		double temp;
+		Hotel cheapHotel=hotelReservation.get(0);
+		cost = costHotel(days,cheapHotel);
+		for(Hotel hotel:hotelReservation)
+		{
+			temp=costHotel(days,hotel);
+			if(cost>temp)
+			{
+				cost = temp;
+				cheapHotel = hotel;
+			}
+		} 
+		System.out.println("The cheapest hotel is "+cheapHotel.getHotelName()+" and the cost of your stay is $"+cost);
+		return cheapHotel.getHotelName();   
+	}   
 }
 
 
