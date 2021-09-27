@@ -19,6 +19,8 @@ public class HotelReservationTest {
         SimpleDateFormat formatter = new SimpleDateFormat("ddMMMyyyy", Locale.ENGLISH);
         String entryHotel=reservationSystem.cheapHotel(formatter.parse("5Oct2020"),formatter.parse("6Oct2020"));
         Assert.assertEquals("Lakewood",entryHotel);
+        String bestHotel=reservationSystem.BestRatedHotel(formatter.parse("11Sep2020"),formatter.parse("12Sep2020"));
+        Assert.assertEquals("Ridgewood",bestHotel);
     }
 }
 	

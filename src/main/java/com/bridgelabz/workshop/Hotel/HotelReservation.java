@@ -8,8 +8,6 @@ import java.util.List;
  * @author Niharika Rao
  *
  */
-
-
 public class HotelReservation {
 	private List<Hotel> hotelReservation=new ArrayList<>();
 	/**
@@ -69,7 +67,7 @@ public class HotelReservation {
 		}
 		double cost;
 		double temp;
-		Hotel cheapHotel=hotelReservation.get(0);
+		Hotel cheapHotel = hotelReservation.get(0);
 		cost = costHotel(days,cheapHotel);
 		for(Hotel hotel:hotelReservation)
 		{
@@ -80,9 +78,40 @@ public class HotelReservation {
 				cheapHotel = hotel;
 			}
 		} 
-		System.out.println("The cheapest hotel is "+cheapHotel.getHotelName()+" and the cost of your stay is $"+cost);
+		System.out.println("The cheapest hotel  for the given date is "+cheapHotel.getHotelName()+" and the cost of your stay would be $"+cost);
 		return cheapHotel.getHotelName();   
 	}   
+
+	/**
+	 * The method BestRatedHotel used to get best rated hotel and also its cost
+	 */
+	public String BestRatedHotel(Date checkIn,Date checkOut)
+	{
+		List<Integer> days=new ArrayList<>();
+		Date i=checkIn;
+		double  ratings=0;
+		Hotel bestHotel = null;
+		while(i.compareTo(checkOut)<1)
+		{
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(i);
+			days.add(cal.get(Calendar.DAY_OF_WEEK));
+			cal.add( Calendar.DATE, 1 );
+			i = cal.getTime();
+		}
+		for(Hotel hotel:hotelReservation)
+		{ 
+			if(ratings<hotel.getRatings())
+			{
+				ratings=hotel.getRatings();
+				bestHotel=hotel;
+			}
+		}
+		System.out.println("The Best Rated Hotel for the given date is "+ bestHotel.getHotelName() +" and the cost is $"+ costHotel(days, bestHotel));
+		return bestHotel.getHotelName();
+	}
+
+
 }
 
 
